@@ -35,6 +35,7 @@
             android:orientation="vertical" >
 
             <LinearLayout
+                android:id="@+id/layout_left_contact"
                 android:layout_width="fill_parent"
                 android:layout_height="45dip"
                 android:layout_marginTop="16dip"
@@ -66,7 +67,8 @@
                 android:layout_marginTop="9dip"
                 android:background="@android:color/white" />
 
-            <RelativeLayout
+            <TableLayout
+                android:id="@+id/layout_left_contact_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dip"
@@ -74,63 +76,74 @@
                 android:layout_marginRight="18dip"
                 android:layout_marginTop="19dip" >
 
-                <LinearLayout
-                    android:id="@+id/layout_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical" >
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
 
                     <com.example.eyecontacts.widget.TextViewPlus
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_of_last_change"
+                        android:layout_weight="3"
+                        android:text="@string/date_of_last_change_colon"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         eyes:textFont="mvboli.ttf" />
 
                     <com.example.eyecontacts.widget.TextViewPlus
-                        android:id="@+id/txt_left_eye_last_chaged"
+                        android:id="@+id/txt_left_eye_last_changed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dip"
+                        android:layout_weight="2"
                         android:text="04/21/2014"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         eyes:textFont="mvboli.ttf" />
-                </LinearLayout>
+                </TableRow>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="20dip"
-                    android:layout_toRightOf="@+id/layout_date"
-                    android:background="@drawable/bg2" >
+                    android:layout_marginTop="10dip" >
 
-                    <TextView
-                        android:id="@+id/txt_left_eye_remain_day"
+                    <com.example.eyecontacts.widget.TextViewPlus
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="12"
-                        android:textColor="@android:color/white"
-                        android:textSize="60sp"
-                        android:textStyle="bold" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="@string/change_lense_in"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        eyes:textFont="mvboli.ttf" />
 
-                    <TextView
-                        android:id="@+id/txt_title_left_eye_day"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:paddingRight="3dip"
-                        android:paddingTop="3dip"
-                        android:text="days"
-                        android:textColor="#58575C" />
-                </RelativeLayout>
-            </RelativeLayout>
+                        android:layout_weight="2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/edit_left_eye_remain_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dip"
+                            android:background="@drawable/butt"
+                            android:gravity="center"
+                            android:inputType="numberSigned"
+                            android:text="14"
+                            android:textSize="14sp" />
+
+                        <com.example.eyecontacts.widget.TextViewPlus
+                            android:id="@+id/txt_title_left_eye_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dip"
+                            android:text="@string/days"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            eyes:textFont="mvboli.ttf" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -143,6 +156,7 @@
             android:orientation="vertical" >
 
             <LinearLayout
+                android:id="@+id/layout_right_contact"
                 android:layout_width="fill_parent"
                 android:layout_height="45dip"
                 android:layout_marginTop="16dip"
@@ -174,71 +188,83 @@
                 android:layout_marginTop="9dip"
                 android:background="@android:color/white" />
 
-            <RelativeLayout
+            <TableLayout
+                android:id="@+id/layout_right_contact_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dip"
                 android:layout_marginLeft="18dip"
                 android:layout_marginRight="18dip"
-                android:layout_marginTop="19dip" >
+                android:layout_marginTop="19dip"
+                android:visibility="gone" >
 
-                <LinearLayout
-                    android:id="@+id/layout_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical" >
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
 
                     <com.example.eyecontacts.widget.TextViewPlus
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_of_last_change"
+                        android:layout_weight="3"
+                        android:text="@string/date_of_last_change_colon"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         eyes:textFont="mvboli.ttf" />
 
                     <com.example.eyecontacts.widget.TextViewPlus
-                        android:id="@+id/txt_right_eye_last_chaged"
+                        android:id="@+id/txt_right_eye_last_changed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dip"
+                        android:layout_weight="2"
                         android:text="04/21/2014"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         eyes:textFont="mvboli.ttf" />
-                </LinearLayout>
+                </TableRow>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="20dip"
-                    android:layout_toRightOf="@+id/layout_date"
-                    android:background="@drawable/bg2" >
+                    android:layout_marginTop="10dip" >
 
-                    <TextView
-                        android:id="@+id/txt_right_eye_remain_day"
+                    <com.example.eyecontacts.widget.TextViewPlus
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="4"
-                        android:textColor="@android:color/white"
-                        android:textSize="60sp"
-                        android:textStyle="bold" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="@string/change_lense_in"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        eyes:textFont="mvboli.ttf" />
 
-                    <TextView
-                        android:id="@+id/txt_title_right_eye_day"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:paddingRight="3dip"
-                        android:paddingTop="3dip"
-                        android:text="days"
-                        android:textColor="#58575C" />
-                </RelativeLayout>
-            </RelativeLayout>
+                        android:layout_weight="2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/edit_right_eye_remain_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dip"
+                            android:background="@drawable/butt"
+                            android:gravity="center"
+                            android:text="14"
+                            android:textSize="14sp" />
+
+                        <com.example.eyecontacts.widget.TextViewPlus
+                            android:id="@+id/txt_title_right_eye_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dip"
+                            android:text="@string/days"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            eyes:textFont="mvboli.ttf" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
     </LinearLayout>
 

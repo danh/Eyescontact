@@ -1,32 +1,82 @@
 package com.example.eyescontacts;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.widget.ImageView;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainActivity extends Activity {
+import com.example.eyecontacts.data.EyesContact;
+import com.example.eyecontacts.utils.DateHelper;
+import com.example.eyescontacts.manager.EyesContactPreference;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends BaseActivity implements Observer {
+	private TextView txtLeftLastChanged;
+	private TextView txtRightLastChanged;
+	private TextView txtLeftRemainDay;
+	private TextView txtRightRemainDay;
+	private TextView txtTitleLeftDay;
+	private TextView txtTitleRightDay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		EyesContactPreference.getInstance().addObserver(this);
 		setContentView(R.layout.activity_main);
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(false);
-		actionBar.setDisplayUseLogoEnabled(false);
-		actionBar.setTitle(R.string.contact_lense);
-		actionBar.setIcon(null);
-		actionBar.setDisplayUseLogoEnabled(false);
-		ImageView iconHome = (ImageView) findViewById(android.R.id.home);
-		iconHome.setImageDrawable(null);
+		setupViews();
+		updateUI();
+	}
+
+	private void setupViews() {
+		Button btn = (Button) findViewById(R.id.btn_change_now);
+		btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						ChangeNowActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		txtLeftLastChanged = (TextView) findViewById(R.id.txt_left_eye_last_chaged);
+		txtRightLastChanged = (TextView) findViewById(R.id.txt_right_eye_last_chaged);
+		txtLeftRemainDay = (TextView) findViewById(R.id.txt_left_eye_remain_day);
+		txtRightRemainDay = (TextView) findViewById(R.id.txt_right_eye_remain_day);
+		txtTitleLeftDay = (TextView) findViewById(R.id.txt_title_left_eye_day);
+		txtTitleRightDay = (TextView) findViewById(R.id.txt_title_right_eye_day);
+	}
+
+	private void updateUI() {
+		final EyesContact leftContact = EyesContactPreference.getInstance()
+				.getLeftEyeContact(getApplicationContext());
+		txtLeftLastChanged.setText(DateHelper.format(
+				leftContact.getTimeLastChange(), DateHelper.FORMAT_DATE));
+		txtLeftRemainDay.setText(leftContact.getRemainDay() + "");
+		if (leftContact.getRemainDay() <= 1) {
+			txtTitleLeftDay.setText(getString(R.string.day));
+		} else {
+			txtTitleLeftDay.setText(getString(R.string.days));
+		}
+
+		final EyesContact rightContact = EyesContactPreference.getInstance()
+				.getRightEyeContact(getApplicationContext());
+		txtRightLastChanged.setText(DateHelper.format(
+				rightContact.getTimeLastChange(), DateHelper.FORMAT_DATE));
+		txtRightRemainDay.setText(rightContact.getRemainDay() + "");
+		if (rightContact.getRemainDay() <= 1) {
+			txtTitleRightDay.setText(getString(R.string.day));
+		} else {
+			txtTitleRightDay.setText(getString(R.string.days));
+		}
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_activity_actions, menu);
-		return true;
+	public void update(Observable arg0, Object data) {
+		updateUI();
 	}
 }
