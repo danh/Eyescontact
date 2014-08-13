@@ -17,7 +17,8 @@ public class EyesContactPreference extends Observable {
 	private static final String LEFT_EYE_PREFS_NAME = "LeftEyePreference";
 	private static final String RIGHT_EYE_PREFS_NAME = "RightEyePreference";
 
-	// key user
+	// key contact
+	private static final String KEY_ID = "id";
 	private static final String KEY_TIME_LAST_SAVE_CHANGE = "timeLastSaveChange";
 	private static final String KEY_TIME_CHANGE_CONTACT = "timeChangeContact";
 
@@ -43,6 +44,7 @@ public class EyesContactPreference extends Observable {
 		SharedPreferences pre = context.getSharedPreferences(
 				LEFT_EYE_PREFS_NAME, 0);
 		EyesContact contact = new EyesContact();
+		contact.setId(EyesContact.LEFT_EYE);
 		Date dateLastChange = DateHelper.parse(
 				pre.getString(KEY_TIME_LAST_SAVE_CHANGE, ""),
 				DateHelper.FORMAT_DATE);
@@ -65,7 +67,7 @@ public class EyesContactPreference extends Observable {
 		SharedPreferences pre = context.getSharedPreferences(
 				LEFT_EYE_PREFS_NAME, 0);
 		SharedPreferences.Editor editor = pre.edit();
-
+		editor.putInt(KEY_ID, contact.getId());
 		editor.putString(KEY_TIME_LAST_SAVE_CHANGE, DateHelper.format(
 				contact.getTimeLastChange(), DateHelper.FORMAT_DATE));
 		editor.putString(KEY_TIME_CHANGE_CONTACT, DateHelper.format(
@@ -80,6 +82,7 @@ public class EyesContactPreference extends Observable {
 		SharedPreferences pre = context.getSharedPreferences(
 				RIGHT_EYE_PREFS_NAME, 0);
 		EyesContact contact = new EyesContact();
+		contact.setId(EyesContact.RIGHT_EYE);
 		Date dateLastChange = DateHelper.parse(
 				pre.getString(KEY_TIME_LAST_SAVE_CHANGE, ""),
 				DateHelper.FORMAT_DATE);
@@ -102,7 +105,7 @@ public class EyesContactPreference extends Observable {
 		SharedPreferences pre = context.getSharedPreferences(
 				RIGHT_EYE_PREFS_NAME, 0);
 		SharedPreferences.Editor editor = pre.edit();
-
+		editor.putInt(KEY_ID, contact.getId());
 		editor.putString(KEY_TIME_LAST_SAVE_CHANGE, DateHelper.format(
 				contact.getTimeLastChange(), DateHelper.FORMAT_DATE));
 		editor.putString(KEY_TIME_CHANGE_CONTACT, DateHelper.format(

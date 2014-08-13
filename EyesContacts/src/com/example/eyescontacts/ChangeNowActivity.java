@@ -7,7 +7,12 @@ import com.example.eyecontacts.data.EyesContact;
 import com.example.eyecontacts.utils.DateHelper;
 import com.example.eyescontacts.manager.EyesContactPreference;
 
+import NotificationHelper.NotificationHelper;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -41,9 +46,31 @@ public class ChangeNowActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				final String leftEdit = editLeftRemainDays.getText().toString();
+				final String rightEdit = editRightRemainDays.getText()
+						.toString();
+
+				if (TextUtils.isEmpty(leftEdit) || (leftEdit.length() >= 5)
+						|| TextUtils.isEmpty(rightEdit)
+						|| (rightEdit.length() >= 5)) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							ChangeNowActivity.this);
+					builder.setTitle("Alert");
+					builder.setMessage("Remain day must be from 0 to 9999");
+					builder.setPositiveButton(android.R.string.ok,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int arg1) {
+									dialog.dismiss();
+								}
+							});
+					builder.show();
+					return;
+				}
+
 				try {
-					int leftRemainDays = Integer.parseInt(editLeftRemainDays
-							.getText().toString());
+					int leftRemainDays = Integer.parseInt(leftEdit);
 					final EyesContact leftContact = new EyesContact();
 					leftContact.setTimeLastChange(Calendar.getInstance()
 							.getTime());
@@ -59,8 +86,7 @@ public class ChangeNowActivity extends BaseActivity {
 				}
 
 				try {
-					int rightRemainDays = Integer.parseInt(editRightRemainDays
-							.getText().toString());
+					int rightRemainDays = Integer.parseInt(rightEdit);
 					final EyesContact rightContact = new EyesContact();
 					rightContact.setTimeLastChange(Calendar.getInstance()
 							.getTime());
@@ -74,6 +100,18 @@ public class ChangeNowActivity extends BaseActivity {
 				} catch (NumberFormatException e) {
 					return;
 				}
+				NotificationHelper.removeAlarm(getApplicationContext(),
+						EyesContact.LEFT_EYE);
+				NotificationHelper.removeAlarm(getApplicationContext(),
+						EyesContact.RIGHT_EYE);
+				NotificationHelper.registerAlarm(
+						getApplicationContext(),
+						EyesContactPreference.getInstance().getLeftEyeContact(
+								getApplicationContext()));
+				NotificationHelper.registerAlarm(
+						getApplicationContext(),
+						EyesContactPreference.getInstance().getRightEyeContact(
+								getApplicationContext()));
 
 				finish();
 			}

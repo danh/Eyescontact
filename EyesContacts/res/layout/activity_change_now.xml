@@ -249,6 +249,7 @@
                             android:layout_height="32dip"
                             android:background="@drawable/butt"
                             android:gravity="center"
+                            android:inputType="numberSigned"
                             android:text="14"
                             android:textSize="14sp" />
 

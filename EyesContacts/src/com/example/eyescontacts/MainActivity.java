@@ -2,11 +2,14 @@ package com.example.eyescontacts;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.example.eyecontacts.data.EyesContact;
 import com.example.eyecontacts.utils.DateHelper;
 import com.example.eyescontacts.manager.EyesContactPreference;
 
+import NotificationHelper.NotificationHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +25,9 @@ public class MainActivity extends BaseActivity implements Observer {
 	private TextView txtTitleLeftDay;
 	private TextView txtTitleRightDay;
 
+	MyTimerTask myTimerTask;
+	Timer timer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +35,32 @@ public class MainActivity extends BaseActivity implements Observer {
 		setContentView(R.layout.activity_main);
 		setupViews();
 		updateUI();
+
+		if (timer != null) {
+			timer.cancel();
+		}
+		timer = new Timer();
+		myTimerTask = new MyTimerTask();
+		timer.schedule(myTimerTask, 0, DateHelper.ONE_DATE);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		EyesContactPreference.getInstance().deleteObserver(this);
+		if (timer != null) {
+			timer.cancel();
+		}
 	}
 
 	private void setupViews() {
@@ -78,5 +110,20 @@ public class MainActivity extends BaseActivity implements Observer {
 	@Override
 	public void update(Observable arg0, Object data) {
 		updateUI();
+	}
+
+	class MyTimerTask extends TimerTask {
+
+		@Override
+		public void run() {
+			System.out.println("iiiiiiiiiiiiiiiiiiiiii: ");
+			runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					updateUI();
+				}
+			});
+		}
 	}
 }
