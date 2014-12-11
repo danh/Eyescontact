@@ -34,8 +34,8 @@ public class EyesContact {
 			return 0;
 		}
 
-		return DateHelper.getDayLeft(getTimeChangeContact(),
-				DateHelper.removeHMS(Calendar.getInstance().getTime()));
+		return DateHelper.getDayLeft(getTimeChangeContact(), Calendar
+				.getInstance().getTime());
 	}
 
 	public int getId() {

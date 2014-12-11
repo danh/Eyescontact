@@ -6,8 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateHelper {
-	public static final String FORMAT_DATE = "MM/dd/yyyy"; // "03-14-2013 00:00:00"
-	public static final long ONE_DATE = 24 * 60 * 60 * 1000;
+	public static final String FORMAT_FULL_DATE = "MM/dd/yyyy HH:mm:ss";
+	public static final String FORMAT_DATE = "MM/dd/yyyy";
+	public static final long ONE_DAY = 24 * 60 * 60 * 1000;
 
 	public static String format(Date date, String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -28,17 +29,17 @@ public class DateHelper {
 		return date;
 	}
 
-	public static Date removeHMS(Date date) {
-		String s = format(date, FORMAT_DATE);
-		return parse(s, FORMAT_DATE);
-	}
-
 	public static int getDayLeft(Date date1, Date date2) {
 		long denta = date1.getTime() - date2.getTime();
-		long rs = denta / (1000 * 60 * 60 * 24);
+		long rs = denta / ONE_DAY;
 		if (rs < 0) {
 			rs = 0;
 		}
+
+		if (denta % ONE_DAY > 0) {
+			rs = rs + 1;
+		}
+
 		return (int) rs;
 	}
 }

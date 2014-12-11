@@ -5,9 +5,9 @@ import java.util.Date;
 
 import com.example.eyecontacts.data.EyesContact;
 import com.example.eyecontacts.utils.DateHelper;
+import com.example.eyecontacts.utils.NotificationHelper;
 import com.example.eyescontacts.manager.EyesContactPreference;
 
-import NotificationHelper.NotificationHelper;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -32,6 +32,11 @@ public class ChangeNowActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_now);
 		setupViews();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		updateUI();
 	}
 
@@ -77,7 +82,7 @@ public class ChangeNowActivity extends BaseActivity {
 
 					Date date = Calendar.getInstance().getTime();
 					date.setTime(date.getTime() + leftRemainDays
-							* DateHelper.ONE_DATE);
+							* DateHelper.ONE_DAY);
 					leftContact.setTimeChangeContact(date);
 					EyesContactPreference.getInstance().saveLeftContact(
 							getApplicationContext(), leftContact);
@@ -93,7 +98,7 @@ public class ChangeNowActivity extends BaseActivity {
 
 					Date date = Calendar.getInstance().getTime();
 					date.setTime(date.getTime() + rightRemainDays
-							* DateHelper.ONE_DATE);
+							* DateHelper.ONE_DAY);
 					rightContact.setTimeChangeContact(date);
 					EyesContactPreference.getInstance().saveRightContact(
 							getApplicationContext(), rightContact);

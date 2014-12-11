@@ -9,7 +9,6 @@ import com.example.eyecontacts.data.EyesContact;
 import com.example.eyecontacts.utils.DateHelper;
 import com.example.eyescontacts.manager.EyesContactPreference;
 
-import NotificationHelper.NotificationHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,14 +33,13 @@ public class MainActivity extends BaseActivity implements Observer {
 		EyesContactPreference.getInstance().addObserver(this);
 		setContentView(R.layout.activity_main);
 		setupViews();
-		updateUI();
 
 		if (timer != null) {
 			timer.cancel();
 		}
 		timer = new Timer();
 		myTimerTask = new MyTimerTask();
-		timer.schedule(myTimerTask, 0, DateHelper.ONE_DATE);
+		timer.schedule(myTimerTask, 0, DateHelper.ONE_DAY);
 	}
 
 	@Override
@@ -52,6 +50,7 @@ public class MainActivity extends BaseActivity implements Observer {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		updateUI();
 	}
 
 	@Override
@@ -116,7 +115,6 @@ public class MainActivity extends BaseActivity implements Observer {
 
 		@Override
 		public void run() {
-			System.out.println("iiiiiiiiiiiiiiiiiiiiii: ");
 			runOnUiThread(new Runnable() {
 
 				@Override

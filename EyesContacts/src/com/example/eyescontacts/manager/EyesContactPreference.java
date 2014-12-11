@@ -47,14 +47,14 @@ public class EyesContactPreference extends Observable {
 		contact.setId(EyesContact.LEFT_EYE);
 		Date dateLastChange = DateHelper.parse(
 				pre.getString(KEY_TIME_LAST_SAVE_CHANGE, ""),
-				DateHelper.FORMAT_DATE);
+				DateHelper.FORMAT_FULL_DATE);
 		if (dateLastChange == null) {
 			dateLastChange = Calendar.getInstance().getTime();
 		}
 		contact.setTimeLastChange(dateLastChange);
 		Date dateChangeContact = DateHelper.parse(
 				pre.getString(KEY_TIME_CHANGE_CONTACT, ""),
-				DateHelper.FORMAT_DATE);
+				DateHelper.FORMAT_FULL_DATE);
 		if (dateChangeContact == null) {
 			dateChangeContact = Calendar.getInstance().getTime();
 		}
@@ -69,9 +69,9 @@ public class EyesContactPreference extends Observable {
 		SharedPreferences.Editor editor = pre.edit();
 		editor.putInt(KEY_ID, contact.getId());
 		editor.putString(KEY_TIME_LAST_SAVE_CHANGE, DateHelper.format(
-				contact.getTimeLastChange(), DateHelper.FORMAT_DATE));
+				contact.getTimeLastChange(), DateHelper.FORMAT_FULL_DATE));
 		editor.putString(KEY_TIME_CHANGE_CONTACT, DateHelper.format(
-				contact.getTimeChangeContact(), DateHelper.FORMAT_DATE));
+				contact.getTimeChangeContact(), DateHelper.FORMAT_FULL_DATE));
 
 		editor.commit();
 		setChanged();
@@ -85,14 +85,14 @@ public class EyesContactPreference extends Observable {
 		contact.setId(EyesContact.RIGHT_EYE);
 		Date dateLastChange = DateHelper.parse(
 				pre.getString(KEY_TIME_LAST_SAVE_CHANGE, ""),
-				DateHelper.FORMAT_DATE);
+				DateHelper.FORMAT_FULL_DATE);
 		if (dateLastChange == null) {
 			dateLastChange = Calendar.getInstance().getTime();
 		}
 		contact.setTimeLastChange(dateLastChange);
 		Date dateChangeContact = DateHelper.parse(
 				pre.getString(KEY_TIME_CHANGE_CONTACT, ""),
-				DateHelper.FORMAT_DATE);
+				DateHelper.FORMAT_FULL_DATE);
 		if (dateChangeContact == null) {
 			dateChangeContact = Calendar.getInstance().getTime();
 		}
@@ -107,9 +107,9 @@ public class EyesContactPreference extends Observable {
 		SharedPreferences.Editor editor = pre.edit();
 		editor.putInt(KEY_ID, contact.getId());
 		editor.putString(KEY_TIME_LAST_SAVE_CHANGE, DateHelper.format(
-				contact.getTimeLastChange(), DateHelper.FORMAT_DATE));
+				contact.getTimeLastChange(), DateHelper.FORMAT_FULL_DATE));
 		editor.putString(KEY_TIME_CHANGE_CONTACT, DateHelper.format(
-				contact.getTimeChangeContact(), DateHelper.FORMAT_DATE));
+				contact.getTimeChangeContact(), DateHelper.FORMAT_FULL_DATE));
 
 		editor.commit();
 		setChanged();
