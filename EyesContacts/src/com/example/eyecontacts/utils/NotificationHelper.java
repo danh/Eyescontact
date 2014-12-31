@@ -5,6 +5,8 @@ import java.util.Calendar;
 import com.example.eyecontacts.data.EyesContact;
 import com.example.eyecontacts.utils.DateHelper;
 import com.example.eyescontacts.AlarmReceiver;
+import com.example.eyescontacts.R;
+import com.example.eyescontacts.manager.EyesContactPreference;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,6 +16,8 @@ import android.os.Bundle;
 
 public class NotificationHelper {
 	public static final int ONE_MINUTE = 60 * 1000;
+	public static final String KEY_MESSAGE = "message";
+	public static final String KEY_CONTACT_ID = "contactId";
 
 	public static void registerAlarm(Context context, EyesContact contact) {
 		AlarmManager am = (AlarmManager) context
@@ -26,7 +30,7 @@ public class NotificationHelper {
 						* DateHelper.ONE_DAY
 						- Calendar.getInstance().getTimeInMillis();
 				createAlarm(secondLeft, context, am, contact,
-						"Don't forget to order new lenses on this week!!!", i);
+						context.getString(R.string.alert_to_change_contact), i);
 			}
 		}
 	}
@@ -42,6 +46,7 @@ public class NotificationHelper {
 
 		Bundle bundle = new Bundle();
 		bundle.putString("Message", message);
+		bundle.putInt(KEY_CONTACT_ID, contact.getId());
 
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.putExtras(bundle);
@@ -51,6 +56,12 @@ public class NotificationHelper {
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), sender);
+
+		final int numberRegisteredNotification = EyesContactPreference
+				.getInstance().getNumberRegisteredNotification(context,
+						contact.getId());
+		EyesContactPreference.getInstance().saveNumberRegisteredNotification(
+				context, numberRegisteredNotification + 1, contact.getId());
 	}
 
 	public static void removeAlarm(Context context, int contactId) {
@@ -58,8 +69,9 @@ public class NotificationHelper {
 				.getSystemService(Context.ALARM_SERVICE);
 		for (int i = 7; i > 0; i--) {
 			Bundle bundle = new Bundle();
-			bundle.putString("Message",
-					"Don't forget to order new lenses on this week!!!");
+			bundle.putString(KEY_MESSAGE,
+					context.getString(R.string.alert_to_change_contact));
+			bundle.putInt(KEY_CONTACT_ID, contactId);
 
 			final int id = contactId * i;
 
@@ -70,5 +82,8 @@ public class NotificationHelper {
 
 			am.cancel(sender);
 		}
+
+		EyesContactPreference.getInstance().saveNumberRegisteredNotification(
+				context, 0, contactId);
 	}
 }

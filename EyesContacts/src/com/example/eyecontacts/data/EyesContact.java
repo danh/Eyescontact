@@ -13,6 +13,10 @@ public class EyesContact {
 	private Date timeLastChange;
 	private Date timeChangeContact;
 
+	public EyesContact(int id){
+		this.id = id;
+	}
+	
 	public Date getTimeLastChange() {
 		return timeLastChange;
 	}

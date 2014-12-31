@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity implements Observer {
 
 	private void updateUI() {
 		final EyesContact leftContact = EyesContactPreference.getInstance()
-				.getLeftEyeContact(getApplicationContext());
+				.getEyeContact(getApplicationContext(), EyesContact.LEFT_EYE);
 		txtLeftLastChanged.setText(DateHelper.format(
 				leftContact.getTimeLastChange(), DateHelper.FORMAT_DATE));
 		txtLeftRemainDay.setText(leftContact.getRemainDay() + "");
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity implements Observer {
 		}
 
 		final EyesContact rightContact = EyesContactPreference.getInstance()
-				.getRightEyeContact(getApplicationContext());
+				.getEyeContact(getApplicationContext(), EyesContact.RIGHT_EYE);
 		txtRightLastChanged.setText(DateHelper.format(
 				rightContact.getTimeLastChange(), DateHelper.FORMAT_DATE));
 		txtRightRemainDay.setText(rightContact.getRemainDay() + "");

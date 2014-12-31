@@ -9,7 +9,6 @@ import com.example.eyecontacts.utils.NotificationHelper;
 import com.example.eyescontacts.manager.EyesContactPreference;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -76,7 +75,8 @@ public class ChangeNowActivity extends BaseActivity {
 
 				try {
 					int leftRemainDays = Integer.parseInt(leftEdit);
-					final EyesContact leftContact = new EyesContact();
+					final EyesContact leftContact = new EyesContact(
+							EyesContact.LEFT_EYE);
 					leftContact.setTimeLastChange(Calendar.getInstance()
 							.getTime());
 
@@ -84,7 +84,7 @@ public class ChangeNowActivity extends BaseActivity {
 					date.setTime(date.getTime() + leftRemainDays
 							* DateHelper.ONE_DAY);
 					leftContact.setTimeChangeContact(date);
-					EyesContactPreference.getInstance().saveLeftContact(
+					EyesContactPreference.getInstance().saveContact(
 							getApplicationContext(), leftContact);
 				} catch (NumberFormatException e) {
 					return;
@@ -92,7 +92,8 @@ public class ChangeNowActivity extends BaseActivity {
 
 				try {
 					int rightRemainDays = Integer.parseInt(rightEdit);
-					final EyesContact rightContact = new EyesContact();
+					final EyesContact rightContact = new EyesContact(
+							EyesContact.RIGHT_EYE);
 					rightContact.setTimeLastChange(Calendar.getInstance()
 							.getTime());
 
@@ -100,7 +101,7 @@ public class ChangeNowActivity extends BaseActivity {
 					date.setTime(date.getTime() + rightRemainDays
 							* DateHelper.ONE_DAY);
 					rightContact.setTimeChangeContact(date);
-					EyesContactPreference.getInstance().saveRightContact(
+					EyesContactPreference.getInstance().saveContact(
 							getApplicationContext(), rightContact);
 				} catch (NumberFormatException e) {
 					return;
@@ -111,12 +112,14 @@ public class ChangeNowActivity extends BaseActivity {
 						EyesContact.RIGHT_EYE);
 				NotificationHelper.registerAlarm(
 						getApplicationContext(),
-						EyesContactPreference.getInstance().getLeftEyeContact(
-								getApplicationContext()));
-				NotificationHelper.registerAlarm(
-						getApplicationContext(),
-						EyesContactPreference.getInstance().getRightEyeContact(
-								getApplicationContext()));
+						EyesContactPreference.getInstance().getEyeContact(
+								getApplicationContext(), EyesContact.LEFT_EYE));
+				NotificationHelper
+						.registerAlarm(
+								getApplicationContext(),
+								EyesContactPreference.getInstance()
+										.getEyeContact(getApplicationContext(),
+												EyesContact.RIGHT_EYE));
 
 				finish();
 			}
@@ -164,7 +167,7 @@ public class ChangeNowActivity extends BaseActivity {
 
 	private void updateUI() {
 		final EyesContact leftContact = EyesContactPreference.getInstance()
-				.getLeftEyeContact(getApplicationContext());
+				.getEyeContact(getApplicationContext(), EyesContact.LEFT_EYE);
 		txtLeftLastChanged.setText(DateHelper.format(
 				leftContact.getTimeLastChange(), DateHelper.FORMAT_DATE));
 		editLeftRemainDays.setText(leftContact.getRemainDay() + "");
@@ -175,7 +178,7 @@ public class ChangeNowActivity extends BaseActivity {
 		}
 
 		final EyesContact rightContact = EyesContactPreference.getInstance()
-				.getRightEyeContact(getApplicationContext());
+				.getEyeContact(getApplicationContext(), EyesContact.RIGHT_EYE);
 		txtRightLastChanged.setText(DateHelper.format(
 				rightContact.getTimeLastChange(), DateHelper.FORMAT_DATE));
 		editRightRemainDays.setText(rightContact.getRemainDay() + "");

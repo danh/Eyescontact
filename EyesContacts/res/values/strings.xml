@@ -15,5 +15,6 @@
     <string name="date_of_last_change_colon">Date of last change:</string>
     <string name="change_lense_in">Change lense in:</string>
     <string name="current_lense_info">Change lense in:</string>
+    <string name="alert_to_change_contact">Don\'t forget to order new lenses on this week!!!</string>
 
 </resources>
