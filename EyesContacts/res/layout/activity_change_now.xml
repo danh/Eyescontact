@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
-                        android:text="@string/change_lense_in"
+                        android:text="@string/change_len_in"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         eyes:textFont="mvboli.ttf" />
@@ -196,7 +196,7 @@
                 android:layout_marginLeft="18dip"
                 android:layout_marginRight="18dip"
                 android:layout_marginTop="19dip"
-                android:visibility="gone" >
+                android:visibility="visible" >
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
-                        android:text="@string/change_lense_in"
+                        android:text="@string/change_len_in"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         eyes:textFont="mvboli.ttf" />

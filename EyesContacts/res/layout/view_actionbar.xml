@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dip"
-        android:text="@string/contact_lense"
+        android:text="@string/contact_lens"
         android:textColor="@android:color/black"
         android:textSize="17sp"
         eyes:textFont="mvboli.ttf" />

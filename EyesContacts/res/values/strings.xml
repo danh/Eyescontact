@@ -3,18 +3,18 @@
 
     <string name="app_name">Eyes Contacts</string>
     <string name="hello_world">Hello world!</string>
-    <string name="contact_lense">Contact Lense</string>
+    <string name="contact_lens">Contact Lens</string>
     <string name="change_now">Change Now</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="date_of_last_change">Date of last change</string>
     <string name="day">day</string>
     <string name="days">days</string>
-    <string name="change_lense_now">Change lense now</string>
+    <string name="change_lens_now">Change lens now</string>
     <string name="save_info">Save Info</string>
     <string name="date_of_last_change_colon">Date of last change:</string>
-    <string name="change_lense_in">Change lense in:</string>
-    <string name="current_lense_info">Change lense in:</string>
-    <string name="alert_to_change_contact">Don\'t forget to order new lenses on this week!!!</string>
+    <string name="change_len_in">Change len in:</string>
+    <string name="current_len_info">Change len in:</string>
+    <string name="alert_to_change_contact">Don\'t forget to order new len on this week!!!</string>
 
 </resources>

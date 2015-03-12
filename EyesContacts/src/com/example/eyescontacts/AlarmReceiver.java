@@ -14,12 +14,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		try {
-			final Intent newIntent = new Intent(context, ReminderDialog.class);
-			newIntent.putExtras(intent.getExtras());
-			newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-			context.startActivity(newIntent);
-
+			NotificationHelper.showNotification(context, intent.getExtras());
 			final int contactId = intent.getIntExtra(
 					NotificationHelper.KEY_CONTACT_ID, 0);
 			if (contactId == 0) {

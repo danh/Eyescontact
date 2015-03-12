@@ -32,17 +32,11 @@ public class AlarmBootReceiver extends BroadcastReceiver {
 				if (eyesContact.getTimeChangeContact().compareTo(
 						currentDate.getTime()) <= 0) {
 					try {
-						final Intent newIntent = new Intent(context,
-								ReminderDialog.class);
 						Bundle bundle = new Bundle();
 						bundle.putString(
 								NotificationHelper.KEY_MESSAGE,
 								context.getString(R.string.alert_to_change_contact));
-						newIntent.putExtras(bundle);
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-						context.startActivity(newIntent);
-
+						NotificationHelper.showNotification(context, bundle);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

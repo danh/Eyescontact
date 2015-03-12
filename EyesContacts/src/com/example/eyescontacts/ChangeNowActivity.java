@@ -41,7 +41,7 @@ public class ChangeNowActivity extends BaseActivity {
 
 	private void setupViews() {
 		((TextView) findViewById(R.id.txt_title_bar))
-				.setText(getString(R.string.change_lense_now));
+				.setText(getString(R.string.change_lens_now));
 		((Button) findViewById(R.id.btn_change_now))
 				.setText(getString(R.string.save_info));
 
